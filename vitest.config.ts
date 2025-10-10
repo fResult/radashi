@@ -1,7 +1,8 @@
+import { resolve } from 'node:path'
 import { defineConfig } from 'vitest/config'
 
-const resolve = (specifier: string) =>
-  new URL(import.meta.resolve(specifier)).pathname
+// const resolve = (specifier: string) =>
+// new URL(import.meta.resolve(specifier)).pathname
 
 export default defineConfig(env => ({
   test: {
@@ -15,7 +16,8 @@ export default defineConfig(env => ({
       include: ['src/**'],
       exclude: ['src/*.ts'],
     },
-    setupFiles: env.mode === 'benchmark' ? ['benchmarks/globals.ts'] : [],
+    setupFiles: [resolve(__dirname, 'benchmarks/globals.ts')],
+    // setupFiles: env.mode === 'benchmark' ? ['benchmarks/globals.ts'] : [],
     typecheck: {
       include: ['tests/**/*.test-d.ts'],
       enabled: true,
